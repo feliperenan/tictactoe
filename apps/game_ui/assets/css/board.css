@@ -1,0 +1,73 @@
+.board {
+  border-collapse: collapse;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.board td {
+  width: 5rem;
+  height: 125px;
+  border: 5px solid #39CCCC;
+  border-radius: 15px;
+  background-color: #eaeaea;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 5rem;
+  font-weight: 600;
+  padding: 0;
+
+}
+
+@media (min-width: 40rem) {
+  .board td {
+    height: 200px;
+  }
+}
+
+@media (hover: hover) {
+  .board td:hover {
+    background-color: #3d4250;
+    color: #cccccc;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+  }
+}
+
+.board .x-mark {
+  color: #ffffff;
+  background-color: #dc685a;
+}
+
+@media (hover: hover) {
+  .board .x-mark:hover {
+    background-color: #dc685a;
+    color: #ffffff;
+  }
+}
+
+.board .o-mark {
+  color: #ffffff;
+  background-color: #ecaf4f;
+}
+
+@media (hover: hover) {
+  .board .o-mark:hover {
+    background-color: #ecaf4f;
+    color: #ffffff;
+  }
+}
+
+.board tr.top td {
+  border-top: none;
+}
+
+.board tr.bottom td {
+  border-bottom: none;
+}
+
+.board td.left {
+  border-left: none;
+}
+
+.board td.right {
+  border-right: none;
+}

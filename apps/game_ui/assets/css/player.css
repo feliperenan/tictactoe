@@ -1,0 +1,30 @@
+.players {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.player-name {
+  font-size: 26px;
+  padding: 0 26px;
+  position: relative;
+	color: #3D4257;
+}
+
+.turn {
+  position: absolute;
+  top: 0;
+}
+
+[data-player-x-turn] {
+  left: -10px;
+}
+
+[data-player-o-turn] {
+  right: -10px;
+}
+
+.player-active {
+  font-size: 30px;
+  font-weight: 700;
+}
+
