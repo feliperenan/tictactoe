@@ -44,14 +44,14 @@ defmodule GameUiWeb.GameChannel do
     {:noreply, socket}
   end
 
-	def handle_in("new_round", _params, socket) do
+  def handle_in("new_round", _params, socket) do
     game = GameEngine.find_or_create_game(socket.assigns.game)
-		new_game = GameEngine.new_round(game)
+    new_game = GameEngine.new_round(game)
 
-		broadcast!(socket, "new_round", new_game)
+    broadcast!(socket, "new_round", new_game)
 
     {:noreply, socket}
-	end
+  end
 
   def handle_info({:after_join, game_state}, socket) do
     broadcast!(socket, "new_player", game_state)
