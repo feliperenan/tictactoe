@@ -1,5 +1,5 @@
 defmodule GameEngine.Application do
-  alias GameEngine.{GameRegistry, GameSupervisor}
+  alias GameEngine.{GameSupervisor}
 
   use Application
 
@@ -7,7 +7,7 @@ defmodule GameEngine.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      GameRegistry,
+      {Registry, keys: :unique, name: :game_server_registry},
       GameSupervisor
     ]
 
