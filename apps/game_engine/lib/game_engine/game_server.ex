@@ -28,7 +28,7 @@ defmodule GameEngine.GameServer do
   ```
   """
 
-  alias GameEngine.{Board, Game, GameRegistry}
+  alias GameEngine.{Board, Game}
 
   use GenServer
 
@@ -55,7 +55,7 @@ defmodule GameEngine.GameServer do
   end
 
   defp via_tuple(name) do
-    {:via, GameRegistry, name}
+    {:via, Registry, {:game_server_registry, name}}
   end
 
   ## Server callbacks
