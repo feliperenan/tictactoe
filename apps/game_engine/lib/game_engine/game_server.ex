@@ -5,27 +5,6 @@ defmodule GameEngine.GameServer do
   Only two players can join into a GameServer once one was created by `start_link/1`. Use `join_player/2`
   for joining users and `put_player_symbol/3` to add the player's symbol in some board position. For
   leaving the game, use `leave/2`.
-
-  ## Examples
-
-  ```Elixir
-  alias GameEngine.{Game, GameServer, Board}
-
-  # Start a game sever.
-  {:ok, game_pid} = GameServer.start_link("new_game")
-
-  # Join Player 1.
-  {:ok, player1_symbol, game} = GameServer.join_player("new_game", "player_1")
-
-  # Join Player 2.
-  {:ok, player2_symbol, game} = GameServer.join_player("new_game", "player_2")
-
-  # Put player 1 symbol (:x) into the position 1 of the board.
-  GameServer.put_player_symbol("new_game", player1_symbol, 1)
-
-  # Put player 2 symbol (:o) into the position 1 of the board.
-  GameServer.put_player_symbol("new_game", player2_symbol, 0)
-  ```
   """
 
   alias GameEngine.{Board, Game}
@@ -34,24 +13,57 @@ defmodule GameEngine.GameServer do
 
   ## Client
 
-  def start_link(name) do
-    GenServer.start_link(__MODULE__, nil, name: via_tuple(name))
+  @doc """
+  Starts a game process with the given name.
+
+  It uses `via_tuple/1` to registry this process and its PID in the Registry.
+  """
+  def start_link(name, initial_state \\ %Game{}) do
+    GenServer.start_link(__MODULE__, initial_state, name: via_tuple(name))
   end
 
+  @doc """
+  Joins the given player in the given game.
+
+  The first player always is going to be the symbol :x and the second one the symbol :o. An error
+  will be returned case a third player tries to join in a game that already has two players.
+  """
   def join_player(game, player) do
     GenServer.call(via_tuple(game), {:join_player, player})
   end
 
-  def put_player_symbol(game, symbol, pos) do
-    GenServer.call(via_tuple(game), {:put_player_symbol, symbol, pos})
+  @doc """
+  Put on the board the players' symbol given the position.
+
+  There are some checks before and after the players' symbol is put on the board, as follow:
+
+  ## Before
+  - Case the game is finished it will return an error.
+  - Case it's not the player's turn it will return an error.
+
+  ## After
+  - Case there is a winner it will finish the game and add the winner symbol to the game state.
+  - Case the board is fulfilled it will finish the game.
+  - Case there is no winner and the board is not fullfilled it will only change which player is the
+    next.
+
+  """
+  def put_player_symbol(game, symbol, position) do
+    GenServer.call(via_tuple(game), {:put_player_symbol, symbol, position})
   end
 
+  @doc """
+  Reset the game state and change which player is the first allowing players to play the game again.
+  """
   def new_round(game) do
     GenServer.call(via_tuple(game), :new_round)
   end
 
+  @doc """
+  Remove the given player's symbol from the game state.
+  """
   def leave(game, symbol) do
-    GenServer.cast(via_tuple(game), {:leave, symbol})
+    GenServer.call(via_tuple(game), {:leave, symbol})
   end
 
   defp via_tuple(name) do
@@ -61,8 +73,8 @@ defmodule GameEngine.GameServer do
   ## Server callbacks
 
   @impl true
-  def init(_) do
-    {:ok, %Game{}}
+  def init(game \\ %Game{}) do
+    {:ok, game}
   end
 
   @impl true
@@ -86,7 +98,7 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def handle_call({:put_player_symbol, _symbol, _pos}, _from, %Game{finished: true} = state) do
-    {:reply, :finished, state}
+    {:reply, {:error, "this game is already finished"}, state}
   end
 
   @impl true
@@ -116,7 +128,7 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def handle_call({:put_player_symbol, symbol, _position}, _from, %Game{next: next} = state) do
-    {:reply, "It's not :#{symbol} turn. Now it's :#{next} turn", state}
+    {:reply, {:error, "It's not :#{symbol} turn. Now it's :#{next} turn"}, state}
   end
 
   @impl true
@@ -126,11 +138,11 @@ defmodule GameEngine.GameServer do
       |> Game.reset_board()
       |> Game.change_first()
 
-    {:reply, new_state, new_state}
+    {:reply, {:ok, new_state}, new_state}
   end
 
   @impl true
-  def handle_cast({:leave, symbol}, state) do
+  def handle_call({:leave, symbol}, _from, state) do
     new_state =
       state
       |> Game.remove_player(symbol)
@@ -139,7 +151,7 @@ defmodule GameEngine.GameServer do
     if Game.without_players?(new_state) do
       {:stop, :normal, new_state}
     else
-      {:noreply, new_state}
+      {:reply, {:ok, new_state}, new_state}
     end
   end
 end
