@@ -7,9 +7,13 @@ defmodule GameEngine.GameServerTest do
   @game_name "my-game"
 
   describe "join_player/2" do
-    test "joins the first player as :x" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
+    setup do
+      start_game_server()
 
+      :ok
+    end
+
+    test "joins the first player as :x" do
       player = "Felipe"
 
       expected =
@@ -30,8 +34,6 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "joins the second player as :o" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
-
       player_x = "Felipe"
       player_o = "Renan"
 
@@ -55,8 +57,6 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "returns an error when already there are two players" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
-
       player_x = "Felipe"
       player_o = "Renan"
 
@@ -71,7 +71,8 @@ defmodule GameEngine.GameServerTest do
 
   describe "put_player_symbol/3" do
     test "returns the finished game when it's finished" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name, %Game{finished: true})
+      start_game_server(%Game{finished: true})
+
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
@@ -82,7 +83,8 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "put the player symbol when it is his/her turn" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
+      start_game_server()
+
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
@@ -106,7 +108,8 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "returns an error when it's not the player turn" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
+      start_game_server()
+
       {:ok, _player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
@@ -118,8 +121,10 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "finish the game and define the winner when there is an winner" do
-      board = %Board{positions: [:x, :x, nil, nil, nil, nil, nil, nil, nil]}
-      {:ok, _game_pid} = GameServer.start_link(@game_name, %Game{board: board})
+      start_game_server(%Game{
+        board: %Board{positions: [:x, :x, nil, nil, nil, nil, nil, nil, nil]}
+      })
+
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
@@ -143,8 +148,11 @@ defmodule GameEngine.GameServerTest do
     end
 
     test "finish the game when the board is fulfilled" do
-      board = %Board{positions: [:x, :o, :x, :x, :o, :x, :o, :x, nil]}
-      {:ok, _game_pid} = GameServer.start_link(@game_name, %Game{board: board, next: :o})
+      start_game_server(%Game{
+        board: %Board{positions: [:x, :o, :x, :x, :o, :x, :o, :x, nil]},
+        next: :o
+      })
+
       {:ok, _player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
@@ -170,10 +178,11 @@ defmodule GameEngine.GameServerTest do
 
   describe "new_round/1" do
     test "reset the board and change which player is the first" do
-      board = %Board{positions: [:x, :o, :x, :x, :o, :x, :o, :x, nil]}
-
-      {:ok, _game_pid} =
-        GameServer.start_link(@game_name, %Game{board: board, finished: true, first: :x})
+      start_game_server(%Game{
+        board: %Board{positions: [:x, :o, :x, :x, :o, :x, :o, :x, nil]},
+        finished: true,
+        first: :x
+      })
 
       {:ok, _player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
@@ -198,7 +207,7 @@ defmodule GameEngine.GameServerTest do
 
   describe "leave/2" do
     test "remove the player from the game server" do
-      {:ok, _game_pid} = GameServer.start_link(@game_name)
+      start_game_server()
 
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
@@ -219,5 +228,14 @@ defmodule GameEngine.GameServerTest do
 
       assert GameServer.leave(@game_name, player_x) == expected
     end
+  end
+
+  defp start_game_server(game \\ %Game{}) do
+    child_spec = %{
+      id: GameServer,
+      start: {GameServer, :start_link, [@game_name, game]}
+    }
+
+    start_supervised!(child_spec)
   end
 end
