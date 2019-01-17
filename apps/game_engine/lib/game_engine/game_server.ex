@@ -38,8 +38,8 @@ defmodule GameEngine.GameServer do
   There are some checks before and after the players' symbol is put on the board, as follow:
 
   ## Before
-  - Case the game is finished it will return `:finished`
-  - Case it's not the player's turn it will return an error message.
+  - Case the game is finished it will return an error.
+  - Case it's not the player's turn it will return an error.
 
   ## After
   - Case there is a winner it will finish the game and add the winner symbol to the game state.
@@ -98,7 +98,7 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def handle_call({:put_player_symbol, _symbol, _pos}, _from, %Game{finished: true} = state) do
-    {:reply, :finished, state}
+    {:reply, {:error, "this game is already finished"}, state}
   end
 
   @impl true
@@ -128,7 +128,7 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def handle_call({:put_player_symbol, symbol, _position}, _from, %Game{next: next} = state) do
-    {:reply, "It's not :#{symbol} turn. Now it's :#{next} turn", state}
+    {:reply, {:error, "It's not :#{symbol} turn. Now it's :#{next} turn"}, state}
   end
 
   @impl true
@@ -138,7 +138,7 @@ defmodule GameEngine.GameServer do
       |> Game.reset_board()
       |> Game.change_first()
 
-    {:reply, new_state, new_state}
+    {:reply, {:ok, new_state}, new_state}
   end
 
   @impl true
@@ -151,7 +151,7 @@ defmodule GameEngine.GameServer do
     if Game.without_players?(new_state) do
       {:stop, :normal, new_state}
     else
-      {:reply, new_state, new_state}
+      {:reply, {:ok, new_state}, new_state}
     end
   end
 end

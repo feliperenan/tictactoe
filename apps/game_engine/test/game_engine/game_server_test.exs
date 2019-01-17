@@ -76,8 +76,9 @@ defmodule GameEngine.GameServerTest do
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
       position = 0
+      expected = {:error, "this game is already finished"}
 
-      assert GameServer.put_player_symbol(@game_name, player_x, position) == :finished
+      assert GameServer.put_player_symbol(@game_name, player_x, position) == expected
     end
 
     test "put the player symbol when it is his/her turn" do
@@ -111,7 +112,7 @@ defmodule GameEngine.GameServerTest do
 
       position = 0
 
-      expected = "It's not :o turn. Now it's :x turn"
+      expected = {:error, "It's not :o turn. Now it's :x turn"}
 
       assert GameServer.put_player_symbol(@game_name, player_o, position) == expected
     end
@@ -177,17 +178,19 @@ defmodule GameEngine.GameServerTest do
       {:ok, _player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
-      expected = %GameEngine.Game{
-        board: %GameEngine.Board{
-          positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]
-        },
-        finished: false,
-        first: :o,
-        next: :o,
-        o: "Renan",
-        winner: nil,
-        x: "Felipe"
-      }
+      expected =
+        {:ok,
+         %GameEngine.Game{
+           board: %GameEngine.Board{
+             positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]
+           },
+           finished: false,
+           first: :o,
+           next: :o,
+           o: "Renan",
+           winner: nil,
+           x: "Felipe"
+         }}
 
       assert GameServer.new_round(@game_name) == expected
     end
@@ -200,17 +203,19 @@ defmodule GameEngine.GameServerTest do
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
 
-      expected = %GameEngine.Game{
-        board: %GameEngine.Board{
-          positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]
-        },
-        finished: false,
-        first: :x,
-        next: :x,
-        o: "Renan",
-        winner: nil,
-        x: nil
-      }
+      expected =
+        {:ok,
+         %GameEngine.Game{
+           board: %GameEngine.Board{
+             positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]
+           },
+           finished: false,
+           first: :x,
+           next: :x,
+           o: "Renan",
+           winner: nil,
+           x: nil
+         }}
 
       assert GameServer.leave(@game_name, player_x) == expected
     end
