@@ -61,6 +61,8 @@ defmodule GameEngine.GameServer do
 
   @doc """
   Remove the given player's symbol from the game state.
+
+  Case the given symbol is the last player in the given game, the game's process is going to die.
   """
   def leave(game, symbol) do
     GenServer.call(via_tuple(game), {:leave, symbol})
@@ -149,7 +151,7 @@ defmodule GameEngine.GameServer do
       |> Game.reset_board()
 
     if Game.without_players?(new_state) do
-      {:stop, :normal, new_state}
+      {:stop, :normal, new_state, new_state}
     else
       {:reply, {:ok, new_state}, new_state}
     end

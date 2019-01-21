@@ -207,7 +207,7 @@ defmodule GameEngine.GameServerTest do
 
   describe "leave/2" do
     test "remove the player from the game server" do
-      start_game_server()
+      pid = start_game_server()
 
       {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
       {:ok, _player_o, _game} = GameServer.join_player(@game_name, "Renan")
@@ -227,6 +227,19 @@ defmodule GameEngine.GameServerTest do
          }}
 
       assert GameServer.leave(@game_name, player_x) == expected
+      assert Process.alive?(pid)
+    end
+
+    test "stops the server when there are no players in the game" do
+      pid = start_game_server()
+
+      {:ok, player_x, _game} = GameServer.join_player(@game_name, "Felipe")
+      {:ok, player_o, _game} = GameServer.join_player(@game_name, "Renan")
+
+      GameServer.leave(@game_name, player_x)
+      GameServer.leave(@game_name, player_o)
+
+      refute Process.alive?(pid)
     end
   end
 
