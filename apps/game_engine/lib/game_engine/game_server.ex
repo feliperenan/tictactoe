@@ -29,7 +29,9 @@ defmodule GameEngine.GameServer do
   will be returned case a third player tries to join in a game that already has two players.
   """
   def join_player(game, player) do
-    GenServer.call(via_tuple(game), {:join_player, player})
+    game
+    |> via_tuple
+    |> GenServer.call({:join_player, player})
   end
 
   @doc """
@@ -49,14 +51,18 @@ defmodule GameEngine.GameServer do
 
   """
   def put_player_symbol(game, symbol, position) do
-    GenServer.call(via_tuple(game), {:put_player_symbol, symbol, position})
+    game
+    |> via_tuple
+    |> GenServer.call({:put_player_symbol, symbol, position})
   end
 
   @doc """
   Reset the game state and change which player is the first allowing players to play the game again.
   """
   def new_round(game) do
-    GenServer.call(via_tuple(game), :new_round)
+    game
+    |> via_tuple
+    |> GenServer.call(:new_round)
   end
 
   @doc """
@@ -65,9 +71,15 @@ defmodule GameEngine.GameServer do
   Case the given symbol is the last player in the given game, the game's process is going to die.
   """
   def leave(game, symbol) do
-    GenServer.call(via_tuple(game), {:leave, symbol})
+    game
+    |> via_tuple
+    |> GenServer.call({:leave, symbol})
   end
 
+  # Uses Registry to register the game in the state.
+  #
+  # via tuple is a way to tell Elixir that we'll use a custom module to register our processes. In
+  # this case, I'm using Registry to do this work.
   defp via_tuple(name) do
     {:via, Registry, {:game_server_registry, name}}
   end
