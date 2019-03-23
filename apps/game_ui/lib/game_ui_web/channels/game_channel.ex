@@ -61,7 +61,7 @@ defmodule GameUiWeb.GameChannel do
   def terminate(_reason, socket) do
     game = GameEngine.find_or_create_game(socket.assigns.game)
 
-    {:ok, _game_state} = GameEngine.leave(game, socket.assigns.symbol)
+    GameEngine.leave(game, socket.assigns.symbol)
 
     broadcast!(socket, "player_left", %{})
   end
