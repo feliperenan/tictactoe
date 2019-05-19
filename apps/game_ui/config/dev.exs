@@ -52,7 +52,8 @@ config :game_ui, GameUiWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/game_ui_web/views/.*(ex)$},
-      ~r{lib/game_ui_web/templates/.*(eex)$}
+      ~r{lib/game_ui_web/templates/.*(eex)$},
+      ~r{lib/game_ui_web/live/.*(ex)$}
     ]
   ]
 
