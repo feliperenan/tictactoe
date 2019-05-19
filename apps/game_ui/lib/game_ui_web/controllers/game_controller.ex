@@ -1,6 +1,8 @@
 defmodule GameUiWeb.GameController do
   use GameUiWeb, :controller
 
+  alias Phoenix.LiveView
+
   plug :check_player
 
   def new(conn, _params) do
@@ -20,7 +22,8 @@ defmodule GameUiWeb.GameController do
   end
 
   def show(conn, %{"name" => name}) do
-    render(conn, "show.html", name: name)
+    session = %{game_name: name, current_player: conn.assigns.current_player}
+    LiveView.Controller.live_render(conn, GameUiWeb.GameLive, session: session)
   end
 
   defp check_player(conn, _options) do

@@ -11,14 +11,6 @@ import css from "../css/app.css"
 //
 import "phoenix_html"
 
-// import Game from "./game"
-//
-// const gameElement = document.querySelector("[data-game]")
-//
-// if (gameElement) {
-//   new Game(gameElement).init()
-// }
-
 import LiveSocket from "phoenix_live_view"
 
 let liveSocket = new LiveSocket("/live")
