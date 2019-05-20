@@ -14,17 +14,11 @@
 
     <%= if @game.finished do %>
       <div class="new-game">
-
         <%= if @game.winner == :draw do %>
           <h2>Draw game</h2>
         <% else %>
-            <%= if @game.winner == :x do %>
-              <h2><%= @game.x <> " won the game" %></h2>
-            <% else %>
-              <h2><%= @game.o <> " won the game" %></h2>
-            <% end %>
+          <h2><%= winner_name(@game) <> " won the game" %></h2>
         <% end %>
-
         <button class="btn btn-primary" phx-click="new_round">NEW GAME</button>
       </div>
     <% else %>

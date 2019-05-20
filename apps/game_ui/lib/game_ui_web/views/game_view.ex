@@ -21,4 +21,13 @@ defmodule GameUiWeb.GameView do
     |> Enum.with_index()
     |> Enum.chunk_every(rows_number)
   end
+
+  @doc """
+  Get the user's name according to game's winner symbol.
+
+  Returns a String.
+  """
+  def winner_name(game) do
+    Map.get(game, game.winner)
+  end
 end
