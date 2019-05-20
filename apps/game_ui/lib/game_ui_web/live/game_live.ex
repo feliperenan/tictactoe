@@ -52,9 +52,7 @@ defmodule GameUiWeb.GameLive do
   def handle_event("put_symbol", index, socket) do
     %{game_name: game_name, player: player} = socket.assigns
 
-    game = GameEngine.find_or_create_game(game_name)
-
-    case GameEngine.put_player_symbol(game, player.symbol, String.to_integer(index)) do
+    case GameEngine.put_player_symbol(game_name, player.symbol, String.to_integer(index)) do
       {:ok, game_state} ->
         GameChannel.broadcast!(game_name, "update_board", %{game: game_state})
 
