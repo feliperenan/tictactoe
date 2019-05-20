@@ -15,11 +15,11 @@
   top: 0;
 }
 
-[data-player-x-turn] {
+.x-turn {
   left: -10px;
 }
 
-[data-player-o-turn] {
+.o-turn {
   right: -10px;
 }
 

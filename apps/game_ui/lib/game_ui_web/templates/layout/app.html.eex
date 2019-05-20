@@ -25,7 +25,6 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
-    <script>window.currentPlayer = "<%= @conn.assigns.current_player %>"</script>
     <script type="text/javascript" src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
