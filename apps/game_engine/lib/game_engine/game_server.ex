@@ -19,7 +19,9 @@ defmodule GameEngine.GameServer do
   It uses `via_tuple/1` to registry this process and its PID in the Registry.
   """
   def start_link(name, initial_state \\ %Game{}) do
-    GenServer.start_link(__MODULE__, initial_state, name: via_tuple(name))
+    game = %{initial_state | name: name}
+
+    GenServer.start_link(__MODULE__, game, name: via_tuple(name))
   end
 
   @doc """
