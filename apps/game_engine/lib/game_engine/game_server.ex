@@ -167,7 +167,7 @@ defmodule GameEngine.GameServer do
       |> Game.reset_board()
 
     if Game.without_players?(new_state) do
-      {:stop, :normal, {:ok, new_state}, new_state}
+      {:stop, :normal, {:closed, new_state}, new_state}
     else
       {:reply, {:ok, new_state}, new_state}
     end
