@@ -7,7 +7,7 @@ defmodule GameEngine.GameServer do
   leaving the game, use `leave/2`.
   """
 
-  alias GameEngine.{Board, Game}
+  alias GameEngine.{Board, Game, GameListRegistry}
 
   use GenServer
 
@@ -90,6 +90,8 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def init(game \\ %Game{}) do
+    GameListRegistry.register(game.name)
+
     {:ok, game}
   end
 

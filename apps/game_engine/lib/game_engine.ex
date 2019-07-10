@@ -3,12 +3,13 @@ defmodule GameEngine do
   Expose all public API's for projects that depend on `GameEngine`.
   """
 
-  alias GameEngine.{GameServer, GameSupervisor, PubSub}
+  alias GameEngine.{GameServer, GameSupervisor, GameListRegistry, PubSub}
 
   defdelegate join_player(game, player), to: GameServer
   defdelegate put_player_symbol(game, symbol, pos), to: GameServer
   defdelegate new_round(game), to: GameServer
   defdelegate leave(game, symbol), to: GameServer
+  defdelegate active_games, to: GameListRegistry
 
   @doc """
   Finds or create a `GameServer` process under `GameSupervisor`.
