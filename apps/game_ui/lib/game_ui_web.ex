@@ -24,6 +24,8 @@ defmodule GameUiWeb do
       import Plug.Conn
       import GameUiWeb.Gettext
       import GameUiWeb.Router.Helpers
+
+      import Phoenix.LiveView.Controller, only: [live_render: 3]
     end
   end
 
