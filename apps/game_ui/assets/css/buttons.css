@@ -1,11 +1,18 @@
+.btn {
+  padding: 0 1rem;
+}
+
 .btn-primary {
-  background-color: #3d4250;
+  background-color: #FFFFFF;
   border-radius: 4px;
-  color: #fff;
-	border: 0.1rem solid #3d4250;
+  color: #3D4256;
 }
 
 .btn-primary:hover {
-  background-color: #262934;
+  background-color: #CCCCCC;
   cursor: pointer;
+}
+
+.btn-block {
+  width: 100%;
 }

@@ -6,6 +6,11 @@
 @import "./new-game.css";
 @import "./phoenix.css";
 @import "./player.css";
+@import "./game-list.css";
+
+body {
+  background-color: #3D4256;
+}
 
 .msg {
   margin-top: 200px;
@@ -20,16 +25,28 @@
   margin: 0 30px;
 }
 
-.form {
-  text-align: center;
-  width: 300px;
-  margin: 200px auto;
-}
-
 .hidden {
   display: none;
 }
 
 .game {
   margin-top: 5rem;
+}
+
+.field {
+  display: flex;
+  width: 100%;
+}
+
+.form {
+  margin-top: 5rem;
+}
+
+.field__input {
+  width: 90%;
+}
+
+.field__button {
+  width: 10%;
+  margin-left: 2px;
 }

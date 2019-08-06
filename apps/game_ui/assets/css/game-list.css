@@ -1,0 +1,25 @@
+.game-list__link {
+  padding: 1rem;
+  display: block;
+  font-weight: 500;
+  font-size: 1.875rem;
+}
+
+.game-list__item {
+  list-style: none;
+  margin: 0;
+  margin-top: 3px;
+}
+
+.game-list__item:nth-child(3n + 1) {
+  background-color: #ECAF4F;
+}
+
+.game-list__item:nth-child(3n + 2) {
+  background-color: #38CBCC;
+}
+
+.game-list__item:nth-child(3n + 3) {
+  background-color: #DC695A;
+}
+

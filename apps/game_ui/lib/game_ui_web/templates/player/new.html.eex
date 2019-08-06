@@ -1,11 +1,9 @@
 <div class="form">
   <%= form_for @conn, player_path(@conn, :create), [as: :player], fn f -> %>
-    <div class="input-group">
-      <%= text_input f, :name, placeholder: "Enter your name", autofocus: true, class: "form-control" %>
+    <div class="field">
+      <%= text_input f, :name, placeholder: "Enter your name", autofocus: true, class: "field__input" %>
 
-      <span class="input-group-btn">
-        <%= submit "Enter", class: "btn btn-primary" %>
-      </span>
+      <%= submit "Enter", class: "btn btn-primary field__button" %>
     </div>
   <% end %>
 </div>
