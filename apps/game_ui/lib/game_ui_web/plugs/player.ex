@@ -1,6 +1,5 @@
 defmodule GameUiWeb.Plugs.Player do
   import Plug.Conn
-  import Phoenix.Controller
 
   def init(options) do
     options
