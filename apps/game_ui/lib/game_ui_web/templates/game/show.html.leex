@@ -4,8 +4,12 @@
       <%= for positions <- split_in_rows_with_index(@game, 3) do %>
         <tr>
           <%= for {symbol, index} <- positions do %>
-            <td class=<%= "#{symbol}-mark" %> phx-click="put_symbol" phx-value-index="<%= index %>">
-            </td>
+            <%= if player_turn?(@game, @player) do %>
+              <td class=<%= "#{symbol}-mark" %> phx-click="put_symbol" phx-value-index="<%= index %>">
+              </td>
+            <% else %>
+              <td class=<%= "#{symbol}-mark" %> data-disabled="true"></td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>

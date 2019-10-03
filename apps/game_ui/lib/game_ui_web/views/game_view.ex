@@ -30,4 +30,19 @@ defmodule GameUiWeb.GameView do
   def winner_name(game) do
     Map.get(game, game.winner)
   end
+
+  @doc """
+  Checks whether it's a player's turn or not.
+
+  Examples:
+
+    iex> GameUiWeb.GameView.player_turn?(%{next: :x}, %{symbol: :x})
+    true
+
+    iex> GameUiWeb.GameView.player_turn?(%{next: :y}, %{symbol: :x})
+    false
+
+  Returns a Boolean.
+  """
+  def player_turn?(%{next: next}, %{symbol: symbol}), do: next == symbol
 end

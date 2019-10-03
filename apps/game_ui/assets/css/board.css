@@ -20,8 +20,9 @@
     background-color: #DC6859;
   }
 
-  .board .x-mark:hover, .board .o-mark:hover {
+  .board .x-mark:hover, .board .o-mark:hover, .board td[data-disabled] {
     background-color: transparent;
+    cursor: default;
   }
 }
 
