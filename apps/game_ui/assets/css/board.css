@@ -15,13 +15,6 @@
   padding: 0;
 }
 
-@media (min-width: 1280px) {
-  .board td {
-    width: 4rem;
-    height: 150px;
-  }
-}
-
 @media (hover: hover) {
   .board td:hover {
     background-color: #DC6859;
