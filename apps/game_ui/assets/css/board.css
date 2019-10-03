@@ -5,17 +5,15 @@
 }
 
 .board td {
-  width: 5rem;
-  height: 100px;
+  display: inline-block;
+  width: 200px;
+  height: 210px;
   border: 5px solid #39CCCC;
   border-radius: 15px;
   background-color: #eaeaea;
   text-align: center;
   vertical-align: middle;
-  font-size: 5rem;
-  font-weight: 600;
   padding: 0;
-
 }
 
 @media (min-width: 1280px) {
@@ -28,33 +26,22 @@
 @media (hover: hover) {
   .board td:hover {
     background-color: #3d4250;
-    color: #cccccc;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
   }
 }
 
-.board .x-mark {
-  color: #ffffff;
-  background-color: #dc685a;
+@keyframes play {
+  100% { background-position: -2600px; }
 }
 
-@media (hover: hover) {
-  .board .x-mark:hover {
-    background-color: #dc685a;
-    color: #ffffff;
-  }
+.board .x-mark {
+  background: url('/images/sprite-x.png') left center;
+  animation: play 0.3s steps(13) 0s 1 normal forwards;
 }
 
 .board .o-mark {
-  color: #ffffff;
-  background-color: #ecaf4f;
-}
-
-@media (hover: hover) {
-  .board .o-mark:hover {
-    background-color: #ecaf4f;
-    color: #ffffff;
-  }
+  background: url('/images/sprite-o.png') left center;
+  animation: play 0.3s steps(13) 0s 1 normal forwards;
 }
 
 .board tr.top td {
