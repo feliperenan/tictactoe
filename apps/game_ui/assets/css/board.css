@@ -1,4 +1,5 @@
 .board {
+  width: auto;
   border-collapse: collapse;
   margin: 0 auto;
   cursor: pointer;
@@ -7,10 +8,8 @@
 .board td {
   display: inline-block;
   width: 200px;
-  height: 210px;
-  border: 5px solid #39CCCC;
-  border-radius: 15px;
-  background-color: #eaeaea;
+  height: 203px;
+  border: 1px solid #3D4257;
   text-align: center;
   vertical-align: middle;
   padding: 0;
@@ -25,8 +24,11 @@
 
 @media (hover: hover) {
   .board td:hover {
-    background-color: #3d4250;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+    background-color: #DC6859;
+  }
+
+  .board .x-mark:hover, .board .o-mark:hover {
+    background-color: transparent;
   }
 }
 
