@@ -1,60 +1,42 @@
 .board {
+  width: auto;
   border-collapse: collapse;
   margin: 0 auto;
   cursor: pointer;
 }
 
 .board td {
-  width: 5rem;
-  height: 100px;
-  border: 5px solid #39CCCC;
-  border-radius: 15px;
-  background-color: #eaeaea;
+  display: inline-block;
+  width: 200px;
+  height: 203px;
+  border: 1px solid #3D4257;
   text-align: center;
   vertical-align: middle;
-  font-size: 5rem;
-  font-weight: 600;
   padding: 0;
-
-}
-
-@media (min-width: 1280px) {
-  .board td {
-    width: 4rem;
-    height: 150px;
-  }
 }
 
 @media (hover: hover) {
   .board td:hover {
-    background-color: #3d4250;
-    color: #cccccc;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+    background-color: #DC6859;
   }
+
+  .board .x-mark:hover, .board .o-mark:hover {
+    background-color: transparent;
+  }
+}
+
+@keyframes play {
+  100% { background-position: -2600px; }
 }
 
 .board .x-mark {
-  color: #ffffff;
-  background-color: #dc685a;
-}
-
-@media (hover: hover) {
-  .board .x-mark:hover {
-    background-color: #dc685a;
-    color: #ffffff;
-  }
+  background: url('/images/sprite-x.png') left center;
+  animation: play 0.3s steps(13) 0s 1 normal forwards;
 }
 
 .board .o-mark {
-  color: #ffffff;
-  background-color: #ecaf4f;
-}
-
-@media (hover: hover) {
-  .board .o-mark:hover {
-    background-color: #ecaf4f;
-    color: #ffffff;
-  }
+  background: url('/images/sprite-o.png') left center;
+  animation: play 0.3s steps(13) 0s 1 normal forwards;
 }
 
 .board tr.top td {
