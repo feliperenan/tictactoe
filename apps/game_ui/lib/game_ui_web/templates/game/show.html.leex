@@ -5,7 +5,6 @@
         <tr>
           <%= for {symbol, index} <- positions do %>
             <td class=<%= "#{symbol}-mark" %> phx-click="put_symbol" phx-value-index="<%= index %>">
-              <%= symbol %>
             </td>
           <% end %>
         </tr>
