@@ -29,7 +29,8 @@ In the end, players can restart the game if they want to.
 $ git clone git@github.com:feliperenan/tictactoe.git
 $ cd tictactoe
 $ mix deps.get
-$ mix phx.server
+$ cd apps/game_ui/assets && npm install
+$ cd ../../../ && mix phx.server
 ```
 
 Go to localhost:4000 and the game is going to be ready to play.

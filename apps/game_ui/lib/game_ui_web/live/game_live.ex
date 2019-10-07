@@ -49,7 +49,7 @@ defmodule GameUiWeb.GameLive do
     end
   end
 
-  def handle_event("put_symbol", index, socket) do
+  def handle_event("put_symbol", %{"index" => index}, socket) do
     %{game_name: game_name, player: player} = socket.assigns
 
     case GameEngine.put_player_symbol(game_name, player.symbol, String.to_integer(index)) do
