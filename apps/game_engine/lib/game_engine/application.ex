@@ -8,6 +8,8 @@ defmodule GameEngine.Application do
 
     children = [
       {Registry, keys: :unique, name: :game_server_registry},
+      {Registry, keys: :duplicate, name: Registry.GameEngineEvents},
+      {Registry, keys: :duplicate, name: Registry.GameList},
       GameSupervisor
     ]
 

@@ -1,11 +1,14 @@
-<div class="form">
-  <%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
-  <div class="input-group">
-    <%= text_input f, :name, placeholder: "Enter a game name", autofocus: true, class: "form-control" %>
+<%= live_render(@conn, GameUiWeb.GameListLive) %>
 
-    <span class="input-group-btn">
-      <%= submit "Play", class: "btn btn-primary" %>
-    </span>
+<%= form_for @conn, game_path(@conn, :create), [as: :game, class: "form"], fn f -> %>
+  <div class="field">
+    <div class="field__input">
+      <%= text_input f, :name, placeholder: "Type a new name to create a game", autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="field__button">
+      <%= submit "Create", class: "btn btn-primary btn-block" %>
+    </div>
   </div>
-  <% end %>
-</div>
+<% end %>
+

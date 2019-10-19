@@ -27,7 +27,8 @@ defmodule GameEngine.GameServerTest do
            next: :x,
            o: nil,
            winner: nil,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.join_player(@game_name, player) == expected
@@ -50,7 +51,8 @@ defmodule GameEngine.GameServerTest do
            next: :x,
            o: "Renan",
            winner: nil,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.join_player(@game_name, player_o) == expected
@@ -101,7 +103,8 @@ defmodule GameEngine.GameServerTest do
            next: :o,
            o: "Renan",
            winner: nil,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.put_player_symbol(@game_name, player_x, position) == expected
@@ -141,7 +144,8 @@ defmodule GameEngine.GameServerTest do
            next: :x,
            o: "Renan",
            winner: :x,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.put_player_symbol(@game_name, player_x, position) == expected
@@ -169,7 +173,8 @@ defmodule GameEngine.GameServerTest do
            next: :o,
            o: "Renan",
            winner: :draw,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.put_player_symbol(@game_name, player_o, position) == expected
@@ -198,7 +203,8 @@ defmodule GameEngine.GameServerTest do
            next: :o,
            o: "Renan",
            winner: nil,
-           x: "Felipe"
+           x: "Felipe",
+           name: @game_name
          }}
 
       assert GameServer.new_round(@game_name) == expected
@@ -223,7 +229,8 @@ defmodule GameEngine.GameServerTest do
            next: :x,
            o: "Renan",
            winner: nil,
-           x: nil
+           x: nil,
+           name: @game_name
          }}
 
       assert GameServer.leave(@game_name, player_x) == expected

@@ -7,7 +7,7 @@ defmodule GameEngine.GameServer do
   leaving the game, use `leave/2`.
   """
 
-  alias GameEngine.{Board, Game}
+  alias GameEngine.{Board, Game, GameListRegistry}
 
   use GenServer
 
@@ -19,7 +19,9 @@ defmodule GameEngine.GameServer do
   It uses `via_tuple/1` to registry this process and its PID in the Registry.
   """
   def start_link(name, initial_state \\ %Game{}) do
-    GenServer.start_link(__MODULE__, initial_state, name: via_tuple(name))
+    game = %{initial_state | name: name}
+
+    GenServer.start_link(__MODULE__, game, name: via_tuple(name))
   end
 
   @doc """
@@ -88,6 +90,8 @@ defmodule GameEngine.GameServer do
 
   @impl true
   def init(game \\ %Game{}) do
+    GameListRegistry.register(game.name)
+
     {:ok, game}
   end
 
@@ -163,7 +167,7 @@ defmodule GameEngine.GameServer do
       |> Game.reset_board()
 
     if Game.without_players?(new_state) do
-      {:stop, :normal, {:ok, new_state}, new_state}
+      {:stop, :normal, {:closed, new_state}, new_state}
     else
       {:reply, {:ok, new_state}, new_state}
     end

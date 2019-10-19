@@ -6,6 +6,7 @@
 @import "./new-game.css";
 @import "./phoenix.css";
 @import "./player.css";
+@import "./game-list.css";
 
 .msg {
   margin-top: 200px;
@@ -18,12 +19,6 @@
   display: inline-block;
   text-align: center;
   margin: 0 30px;
-}
-
-.form {
-  text-align: center;
-  width: 300px;
-  margin: 200px auto;
 }
 
 .hidden {

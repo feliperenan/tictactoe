@@ -11,7 +11,8 @@ defmodule GameEngine.Game do
             next: :x,
             first: :x,
             finished: false,
-            winner: nil
+            winner: nil,
+            name: nil
 
   @doc """
   Changes the given game to finished.
