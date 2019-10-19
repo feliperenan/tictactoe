@@ -1,3 +1,5 @@
+<%= live_render(@conn, GameUiWeb.GameListLive) %>
+
 <%= form_for @conn, game_path(@conn, :create), [as: :game, class: "form"], fn f -> %>
   <div class="field">
     <div class="field__input">
@@ -10,6 +12,3 @@
   </div>
 <% end %>
 
-<h1>Active games</h1>
-
-<%= live_render(@conn, GameUiWeb.GameListLive) %>

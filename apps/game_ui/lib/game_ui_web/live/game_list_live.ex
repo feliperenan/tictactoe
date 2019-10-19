@@ -11,7 +11,7 @@ defmodule GameUiWeb.GameListLive do
     <ul class="game-list">
     <%= for game <- @games do %>
       <li class="game-list__item">
-        <%= link game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" %>
+        <%= link "# " <> game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" %>
       </li>
       <% end %>
     </ul>
