@@ -9,9 +9,9 @@ defmodule GameUiWeb.GameController do
 
   def create(conn, %{"game" => game_params}) do
     case Map.get(game_params, "name") do
-      nil ->
+      "" ->
         conn
-        |> put_flash(:error, "Game cannot be empty")
+        |> put_flash(:error, "You should provide a name for the game.")
         |> render("new.html")
 
       name ->
