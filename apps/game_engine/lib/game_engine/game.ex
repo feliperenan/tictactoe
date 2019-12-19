@@ -46,8 +46,7 @@ defmodule GameEngine.Game do
   def next_turn(%__MODULE__{next: :o} = game), do: %__MODULE__{game | next: :x}
 
   @doc """
-  Changes who player is the first. Useful when players are going to play again to not repeat the first
-  every game.
+  Changes which player will be the starter.
 
   * Case the actual is :x, it is going to change to :o be the next.
   * Case the actual is :o, it is going to change to :x be the next.
