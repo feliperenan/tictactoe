@@ -5,7 +5,13 @@ defmodule GameUiWeb.Endpoint do
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  @session_options [
+    store: :cookie,
+    key: "_game_ui_key",
+    signing_salt: "IVyJic0i"
+  ]
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -39,10 +45,7 @@ defmodule GameUiWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_game_ui_key",
-    signing_salt: "IVyJic0i"
+  plug Plug.Session, @session_options
 
   plug GameUiWeb.Router
 end
