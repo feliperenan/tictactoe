@@ -44,8 +44,8 @@ defmodule GameUiWeb do
       import GameUiWeb.ErrorHelpers
       import GameUiWeb.Gettext
       import GameUiWeb.Router.Helpers
-
       import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
+      import Surface
     end
   end
 

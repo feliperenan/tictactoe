@@ -1,5 +1,5 @@
 defmodule GameUiWeb.GameListLive do
-  use Phoenix.LiveView
+  use Surface.LiveView
 
   import Phoenix.HTML.Link, only: [link: 2]
 
@@ -7,13 +7,11 @@ defmodule GameUiWeb.GameListLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
+    ~H"""
     <ul class="game-list">
-    <%= for game <- @games do %>
-      <li class="game-list__item">
-        <%= link "# " <> game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" %>
+      <li :for={{ game <- @games }} class="game-list__item">
+        {{ link "# " <> game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" }}
       </li>
-      <% end %>
     </ul>
     """
   end
