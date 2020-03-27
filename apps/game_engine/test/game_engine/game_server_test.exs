@@ -1,8 +1,9 @@
 defmodule GameEngine.GameServerTest do
   use ExUnit.Case
-  doctest GameEngine.GameServer
 
   alias GameEngine.{Board, Game, GameServer}
+
+  doctest GameServer
 
   @game_name "my-game"
 

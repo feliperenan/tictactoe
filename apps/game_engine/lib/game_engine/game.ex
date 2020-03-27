@@ -19,8 +19,8 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> GameEngine.Game.finish(%GameEngine.Game{finished: false}, :x)
-      %GameEngine.Game{finished: true, winner: :x}
+      iex> Game.finish(%Game{finished: false}, :x)
+      %Game{finished: true, winner: :x}
 
   """
   def finish(%__MODULE__{} = game, winner) do
@@ -35,11 +35,11 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> GameEngine.Game.next_turn(%GameEngine.Game{next: :x})
-      %GameEngine.Game{next: :o}
+      iex> Game.next_turn(%Game{next: :x})
+      %Game{next: :o}
 
-      iex> GameEngine.Game.next_turn(%GameEngine.Game{next: :o})
-      %GameEngine.Game{next: :x}
+      iex> Game.next_turn(%Game{next: :o})
+      %Game{next: :x}
 
   """
   def next_turn(%__MODULE__{next: :x} = game), do: %__MODULE__{game | next: :o}
@@ -53,11 +53,11 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> GameEngine.Game.change_first(%GameEngine.Game{first: :x})
-      %GameEngine.Game{first: :o, next: :o}
+      iex> Game.change_first(%Game{first: :x})
+      %Game{first: :o, next: :o}
 
-      iex> GameEngine.Game.change_first(%GameEngine.Game{first: :o})
-      %GameEngine.Game{first: :x, next: :x}
+      iex> Game.change_first(%Game{first: :o})
+      %Game{first: :x, next: :x}
 
   """
   def change_first(%__MODULE__{first: :x} = game), do: %__MODULE__{game | first: :o, next: :o}
@@ -68,8 +68,8 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> GameEngine.Game.remove_player(%GameEngine.Game{x: "player_1", o: "player_2"}, :x)
-      %GameEngine.Game{x: nil, o: "player_2"}
+      iex> Game.remove_player(%Game{x: "player_1", o: "player_2"}, :x)
+      %Game{x: nil, o: "player_2"}
 
   """
   def remove_player(%__MODULE__{} = game, player_symbol) do
@@ -81,9 +81,9 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> board = %GameEngine.Board{positions: [:x, :x, nil, :o, :o, :o, nil, :x, nil]}
-      iex> GameEngine.Game.reset_board(%GameEngine.Game{board: board, finished: true})
-      %GameEngine.Game{board: %GameEngine.Board{}, finished: false}
+      iex> board = %Board{positions: [:x, :x, nil, :o, :o, :o, nil, :x, nil]}
+      iex> Game.reset_board(%Game{board: board, finished: true})
+      %Game{board: %Board{}, finished: false}
 
   """
   def reset_board(%__MODULE__{} = game) do
@@ -95,16 +95,16 @@ defmodule GameEngine.Game do
 
   ## Examples
 
-      iex> GameEngine.Game.without_players?(%GameEngine.Game{x: nil, o: nil})
+      iex> Game.without_players?(%Game{x: nil, o: nil})
       true
 
-      iex> GameEngine.Game.without_players?(%GameEngine.Game{x: "player_1", o: "player_2"})
+      iex> Game.without_players?(%Game{x: "player_1", o: "player_2"})
       false
 
-      iex> GameEngine.Game.without_players?(%GameEngine.Game{x: "player_1", o: nil})
+      iex> Game.without_players?(%Game{x: "player_1", o: nil})
       false
 
-      iex> GameEngine.Game.without_players?(%GameEngine.Game{x: nil, o: "player_2"})
+      iex> Game.without_players?(%Game{x: nil, o: "player_2"})
       false
 
   """

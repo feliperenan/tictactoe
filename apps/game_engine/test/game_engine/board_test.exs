@@ -1,4 +1,7 @@
 defmodule GameEngine.BoardTest do
   use ExUnit.Case
-  doctest GameEngine.Board
+
+  alias GameEngine.Board
+
+  doctest Board
 end

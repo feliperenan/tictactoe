@@ -21,20 +21,20 @@ defmodule GameEngine.Board do
 
   ## Examples
 
-      iex> GameEngine.Board.put(%GameEngine.Board{}, 0, :x)
-      %GameEngine.Board{positions: [:x, nil, nil, nil, nil, nil, nil, nil, nil]}
+      iex> Board.put(%Board{}, 0, :x)
+      %Board{positions: [:x, nil, nil, nil, nil, nil, nil, nil, nil]}
 
-      iex> GameEngine.Board.put(%GameEngine.Board{}, 8, :o)
-      %GameEngine.Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, :o]}
+      iex> Board.put(%Board{}, 8, :o)
+      %Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, :o]}
 
-      iex> GameEngine.Board.put(%GameEngine.Board{}, :unknow, 8)
+      iex> Board.put(%Board{}, :unknow, 8)
       {:error, "Wrong symbol and/or wrong position. Check if you are passing :x or :o as symbol and a position between 0 and 8."}
 
-      iex> GameEngine.Board.put(%GameEngine.Board{}, 10, :o)
+      iex> Board.put(%Board{}, 10, :o)
       {:error, "Wrong symbol and/or wrong position. Check if you are passing :x or :o as symbol and a position between 0 and 8."}
 
-      iex> board = %GameEngine.Board{positions: [:x, nil, nil, nil, nil, nil, nil, nil, nil]}
-      iex> GameEngine.Board.put(board, 0, :o)
+      iex> board = %Board{positions: [:x, nil, nil, nil, nil, nil, nil, nil, nil]}
+      iex> Board.put(board, 0, :o)
       {:error, "The position: 0 already has the symbol: x"}
 
   """
@@ -63,12 +63,12 @@ defmodule GameEngine.Board do
 
   ## Examples
 
-      iex> board = %GameEngine.Board{positions: [:x, :o, :x, :x, :o, :o, :x, :o, :x]}
-      iex> GameEngine.Board.full?(board)
+      iex> board = %Board{positions: [:x, :o, :x, :x, :o, :o, :x, :o, :x]}
+      iex> Board.full?(board)
       true
 
-      iex> board = %GameEngine.Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]}
-      iex> GameEngine.Board.full?(board)
+      iex> board = %Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]}
+      iex> Board.full?(board)
       false
 
   """
@@ -81,16 +81,16 @@ defmodule GameEngine.Board do
 
   ## Examples
 
-      iex> board = %GameEngine.Board{positions: [:x, :x, :x, :o, :o, :x, nil, nil, nil]}
-      iex> GameEngine.Board.winner(board)
+      iex> board = %Board{positions: [:x, :x, :x, :o, :o, :x, nil, nil, nil]}
+      iex> Board.winner(board)
       :x
 
-      iex> board = %GameEngine.Board{positions: [:x, :x, nil, :o, :o, :o, nil, :x, nil]}
-      iex> GameEngine.Board.winner(board)
+      iex> board = %Board{positions: [:x, :x, nil, :o, :o, :o, nil, :x, nil]}
+      iex> Board.winner(board)
       :o
 
-      iex> board = %GameEngine.Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]}
-      iex> GameEngine.Board.winner(board)
+      iex> board = %Board{positions: [nil, nil, nil, nil, nil, nil, nil, nil, nil]}
+      iex> Board.winner(board)
       nil
   """
   def winner(%__MODULE__{positions: positions}) do
