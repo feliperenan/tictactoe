@@ -72,9 +72,8 @@ defmodule GameEngine.Game do
       %Game{x: nil, o: "player_2"}
 
   """
-  def remove_player(%__MODULE__{} = game, player_symbol) do
-    Map.put(game, player_symbol, nil)
-  end
+  def remove_player(%__MODULE__{} = game, player_symbol),
+    do: %{game | player_symbol => nil}
 
   @doc """
   Resets the board states and changes the Game to unfinished.
