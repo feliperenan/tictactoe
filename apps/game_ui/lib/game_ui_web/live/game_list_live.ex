@@ -19,7 +19,7 @@ defmodule GameUiWeb.GameListLive do
   end
 
   @impl true
-  def mount(_session, socket) do
+  def mount(_params, _session, socket) do
     GameEngine.subscribe(~w(game_created game_closed)a)
 
     {:ok, assign(socket, games: GameEngine.active_games())}

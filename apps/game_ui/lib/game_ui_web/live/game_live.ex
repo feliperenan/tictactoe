@@ -28,13 +28,18 @@ defmodule GameUiWeb.GameLive do
     """
   end
 
-  def mount(session, socket) do
-    if connected?(socket), do: join_player(session)
+  def mount(_params, %{"game_name" => game_name, "current_player" => current_player} = session, socket) do
+    if connected?(socket), do: join_player(game_name, current_player)
 
-    {:ok, assign(socket, game: nil, game_name: session.game_name, player: %{name: session.current_player})}
+    {:ok,
+     assign(socket,
+       game: nil,
+       game_name: game_name,
+       player: %{name: current_player}
+     )}
   end
 
-  defp join_player(%{game_name: game_name, current_player: current_player}) do
+  defp join_player(game_name, current_player) do
     GameChannel.subscribe(game_name)
 
     game_name = GameEngine.find_or_create_game(game_name)
