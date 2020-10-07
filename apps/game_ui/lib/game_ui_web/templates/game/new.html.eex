@@ -1,6 +1,6 @@
 <%= live_render(@conn, GameUiWeb.GameListLive) %>
 
-<%= form_for @conn, game_path(@conn, :create), [as: :game, class: "form"], fn f -> %>
+<%= form_for @conn, Routes.game_path(@conn, :create), [as: :game, class: "form"], fn f -> %>
   <div class="field">
     <div class="field__input">
       <%= text_input f, :name, placeholder: "Type a new name to create a game", autofocus: true, class: "form-control" %>

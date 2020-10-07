@@ -6,12 +6,9 @@ defmodule GameUi.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
-      # Start the endpoint when the application starts
+      {Phoenix.PubSub, name: GameUi.PubSub},
       GameUiWeb.Endpoint
-      # Starts a worker by calling: GameUi.Worker.start_link(arg)
-      # {GameUi.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

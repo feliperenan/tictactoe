@@ -20,7 +20,11 @@ defmodule GameUiWeb.GameController do
   end
 
   def show(conn, %{"name" => name}) do
-    session = %{game_name: name, current_player: conn.assigns.current_player}
+    session = %{
+      "game_name" => name,
+      "current_player" => conn.assigns.current_player
+    }
+
     live_render(conn, GameUiWeb.GameLive, session: session)
   end
 

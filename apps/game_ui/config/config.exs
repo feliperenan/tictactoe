@@ -12,7 +12,7 @@ config :game_ui, GameUiWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "iSgt9Ix3IycYEy8B0DCOQpJLZpUsC4spNQiVXSnYllu8VYy6V8fDuqEAy1U4uCXS",
   render_errors: [view: GameUiWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: GameUi.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: GameUi.PubSub,
   live_view: [signing_salt: "ruPl32nOr7f0JYZb5dDSlLPgiX8/q3P/oVre0GMTLvAtLLvpd+XzVKDLzHWRqWn+"]
 
 # Configures Elixir's Logger
