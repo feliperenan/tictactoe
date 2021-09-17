@@ -1,0 +1,28 @@
+.new-game {
+  background: rgba(0, 0, 0, .7);
+  color: #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.new-game h3 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+@media(min-width: 450px) {
+  .new-game h3 {
+    font-size: 4rem;
+  }
+}

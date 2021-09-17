@@ -1,21 +1,19 @@
-# TIC TAC TOE
-This game is implemented in Elixir. The code is based on this [talk](https://speakerdeck.com/ventsislaf/building-multiplayer-real-time-game-with-elixir-and-phoenix). 
+# Tictactoe
 
-![Game example](gifs/game_example.gif)
+To start your Phoenix server:
 
-This game is deployed on Heroku in case you want to check this out: https://frg-tictactoe.herokuapp.com/
+  * Install dependencies with `mix deps.get`
+  * Install Node.js dependencies with `cd assets && npm install`
+  * Start Phoenix endpoint with `mix phx.server`
 
-## Requirements
-- Elixir 1.7+
-- Phoenix 1.4+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-## Setup
-```bash
-$ git clone git@github.com:feliperenan/tictactoe.git
-$ cd tictactoe
-$ mix deps.get
-$ cd apps/game_ui/assets && npm install
-$ cd ../../../ && mix phx.server
-```
+Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-Go to localhost:4000 and the game is going to be ready to play.
+## Learn more
+
+  * Official website: http://www.phoenixframework.org/
+  * Guides: https://hexdocs.pm/phoenix/overview.html
+  * Docs: https://hexdocs.pm/phoenix
+  * Mailing list: http://groups.google.com/group/phoenix-talk
+  * Source: https://github.com/phoenixframework/phoenix

@@ -1,20 +1,46 @@
-defmodule TicTacToe.MixProject do
+defmodule Tictactoe.MixProject do
   use Mix.Project
 
   def project do
     [
-      apps_path: "apps",
+      app: :tictactoe,
+      version: "0.1.0",
+      elixir: "~> 1.12",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
 
-  # Dependencies listed here are available only for this
-  # project and cannot be accessed from applications inside
-  # the apps folder.
+  # Configuration for the OTP application.
   #
-  # Run "mix help deps" for examples and options.
+  # Type `mix help compile.app` for more information.
+  def application do
+    [
+      mod: {Tictactoe.Application, []},
+      extra_applications: [:logger, :runtime_tools]
+    ]
+  end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
+  # Specifies your project dependencies.
+  #
+  # Type `mix help deps` for examples and options.
   defp deps do
-    []
+    [
+      {:phoenix, "~> 1.5"},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:phoenix_html, "~> 2.14"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, "~> 0.14.7"},
+      {:gettext, "~> 0.11"},
+      {:jason, "~> 1.0"},
+      {:ex_zample, github: "ulissesalmeida/ex_zample"},
+      {:plug_cowboy, "~> 2.0"}
+    ]
   end
 end
