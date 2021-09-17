@@ -8,13 +8,20 @@ defmodule GameUiWeb.GameListLive do
   @impl true
   def render(assigns) do
     ~L"""
-    <ul class="game-list">
-    <%= for game <- @games do %>
-      <li class="game-list__item">
-        <%= link "# " <> game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" %>
-      </li>
+    <div>
+      <%= if length(@games) > 0 do %>
+        <p class="text-xl text-gray-500">
+          Or join one of the games below:
+        </p>
       <% end %>
-    </ul>
+      <ul class="ml-5 mt-2 text-gray-500">
+      <%= for game <- @games do %>
+        <li class="list-disc">
+          <%= link game, to: Routes.game_path(@socket, :show, game), class: "game-list__link" %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
     """
   end
 

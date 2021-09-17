@@ -1,11 +1,14 @@
-<div class="form">
-  <%= form_for @conn, Routes.player_path(@conn, :create), [as: :player], fn f -> %>
-    <div class="input-group">
-      <%= text_input f, :name, placeholder: "Enter your name", autofocus: true, class: "form-control" %>
+<div class="md:w-3/6 mx-auto mt-40 p-5">
+  <p class="mb-5 text-xl text-gray-600">
+    Let's play Tic-Tac-Toe? 
+  </p>
+  <%= form_for @conn, Routes.player_path(@conn, :create), [as: :player, class: "grid grid-cols-12"], fn f -> %>
+    <div class="col-span-9">
+      <%= text_input f, :name, placeholder: "First, enter your name here...", autofocus: true, class: "w-full border-b border-gray-300" %>
+    </div>
 
-      <span class="input-group-btn">
-        <%= submit "Enter", class: "btn btn-primary" %>
-      </span>
+    <div class="col-span-3">
+      <%= submit "Submit", class: "w-full border border-blue-500 px-4 py-2 bg-blue-500 text-blue-100" %>
     </div>
   <% end %>
 </div>

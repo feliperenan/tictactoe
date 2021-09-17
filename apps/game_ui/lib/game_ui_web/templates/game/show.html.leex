@@ -1,47 +1,34 @@
-<section class="game">
-  <%= if @game.x && @game.o do %>
-    <table class="board">
-      <%= for positions <- split_in_rows_with_index(@game, 3) do %>
-        <tr>
-          <%= for {symbol, index} <- positions do %>
-            <%= if player_turn?(@game, @player) do %>
-              <td class=<%= "#{symbol}-mark" %> phx-click="put_symbol" phx-value-index="<%= index %>">
-              </td>
-            <% else %>
-              <td class=<%= "#{symbol}-mark" %> data-disabled="true"></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
+<%= if @game.x && @game.o do %>
+  <div class="max-w-2xl mx-auto">
+	  <%= live_component @socket, GameUiWeb.BoardComponent, id: :board, game: @game, player: @player %>
+  </div>
 
-    <section class="players">
-      <div class="inline-block">
-        <div class="player-name">
-          <%= if @game.next == :x do %>
-            <span class="turn x-turn">&#8680;</span>
-          <% end %>
+  <section class="players text-gray-600">
+    <div class="inline-block">
+      <div class="player-name">
+        <%= if @game.next == :x do %>
+          <span class="turn x-turn">&#8680;</span>
+        <% end %>
 
-          <span><%= @game.x %></span>
-        </div>
+        <span><%= @game.x %></span>
       </div>
-
-      <div class="inline-block">
-        <div class="player-name">
-          <span><%= @game.o %></span>
-
-          <%= if @game.next == :o do %>
-            <span class="turn o-turn">&#8678;</span>
-          <% end %>
-        </div>
-      </div>
-    </section>
-  <% else %>
-    <div class="msg">
-      Waiting for a second player...
     </div>
-  <% end %>
-</section>
+
+    <div class="inline-block text-gray-600">
+      <div class="player-name">
+        <span><%= @game.o %></span>
+
+        <%= if @game.next == :o do %>
+          <span class="turn o-turn">&#8678;</span>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% else %>
+  <p class="text-gray-600">
+    Waiting for a second player...
+  </p>
+<% end %>
 
 <%= if @game.finished do %>
   <div class="new-game">
