@@ -1,30 +1,6 @@
-/* This file is for your main application css. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "./board.css";
-@import "./buttons.css";
-@import "./header.css";
-@import "./new-game.css";
-@import "./phoenix.css";
 @import "./player.css";
-@import "./game-list.css";
 
-.msg {
-  margin-top: 200px;
-  font-size: 40px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.inline-block {
-  display: inline-block;
-  text-align: center;
-  margin: 0 30px;
-}
-
-.hidden {
-  display: none;
-}
-
-.game {
-  margin-top: 5rem;
-}
