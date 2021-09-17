@@ -1,17 +1,28 @@
 # This file is responsible for configuring your application
 # and its dependencies with the aid of the Mix.Config module.
+#
+# This configuration file is loaded before any dependency and
+# is restricted to this project.
+
+# General application configuration
 use Mix.Config
 
-# By default, the umbrella project as well as each child
-# application will require this configuration file, ensuring
-# they all use the same configuration. While one could
-# configure all applications here, we prefer to delegate
-# back to each application for organization purposes.
-import_config "../apps/*/config/config.exs"
+# Configures the endpoint
+config :tictactoe, TictactoeWeb.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "iSgt9Ix3IycYEy8B0DCOQpJLZpUsC4spNQiVXSnYllu8VYy6V8fDuqEAy1U4uCXS",
+  render_errors: [view: TictactoeWeb.ErrorView, accepts: ~w(html json)],
+  pubsub_server: Tictactoe.PubSub,
+  live_view: [signing_salt: "ruPl32nOr7f0JYZb5dDSlLPgiX8/q3P/oVre0GMTLvAtLLvpd+XzVKDLzHWRqWn+"]
 
-# Sample configuration (overrides the imported configuration above):
-#
-#     config :logger, :console,
-#       level: :info,
-#       format: "$date $time [$level] $metadata$message\n",
-#       metadata: [:user_id]
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env()}.exs"

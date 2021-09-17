@@ -1,0 +1,12 @@
+.game-list__link {
+  padding: 1rem;
+  display: block;
+  font-weight: 500;
+  font-size: 1.875rem;
+}
+
+.game-list__item {
+  list-style: none;
+  margin: 0;
+  margin-top: 1px;
+}
