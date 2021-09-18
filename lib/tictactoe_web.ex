@@ -26,6 +26,8 @@ defmodule TictactoeWeb do
       import TictactoeWeb.Router.Helpers
 
       import Phoenix.LiveView.Controller, only: [live_render: 3]
+
+      alias TictactoeWeb.Router.Helpers, as: Routes
     end
   end
 

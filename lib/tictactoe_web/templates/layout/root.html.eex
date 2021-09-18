@@ -10,17 +10,15 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <section class="container mx-auto">
-      <%= if @conn.assigns.current_player do %>
-        <div class="flex justify-end p-5">
-          <%= link to: Routes.player_path(@conn, :delete, @conn.assigns.current_player), method: :delete do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg> 
-          <% end %>
-        </div>
+    <div class="flex justify-end p-5">
+      <%= if @conn.private.plug_session["player_name"] do %>
+        <%= link to: Routes.logout_path(@conn, :delete), method: :delete do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        <% end %>
       <% end %>
-    </section>
+    </div>
     <%= @inner_content %>
   </body>
 </html>

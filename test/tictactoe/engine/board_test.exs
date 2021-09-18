@@ -40,7 +40,7 @@ defmodule Tictactoe.Engine.BoardTest do
     test "returns an error when the given position already has a symbol" do
       board = build(:board)
 
-      expected_board = 
+      expected_board =
         board
         |> Board.put(1, :x)
         |> Board.put(1, :o)
@@ -51,7 +51,7 @@ defmodule Tictactoe.Engine.BoardTest do
 
   describe "full?/1" do
     test "returns false when it still has positions without symbol" do
-      board = 
+      board =
         :board
         |> build()
         |> Board.put(1, :x)
