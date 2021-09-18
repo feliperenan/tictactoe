@@ -1,5 +1,7 @@
 # Used by "mix format"
 [
-  inputs: ["mix.exs", "config/*.exs"],
+  import_deps: [:ecto, :phoenix],
+  inputs: ["*.{ex,exs}", "priv/*/seeds.exs", "{config,lib,test}/**/*.{ex,exs}"],
+  inputs: ["mix.exs", "*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}"],
   subdirectories: ["apps/*"]
 ]

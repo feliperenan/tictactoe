@@ -1,5 +1,5 @@
 defmodule TictactoeWeb.BoardComponent do
-  use Phoenix.LiveComponent
+  use TictactoeWeb, :live_component
 
   def render(assigns) do
     ~L"""
@@ -7,13 +7,13 @@ defmodule TictactoeWeb.BoardComponent do
       <%= for positions <- split_in_rows_with_index(@game, 3) do %>
         <%= for {symbol, index} <- positions do %>
           <%= if player_turn?(@game, @player) do %>
-            <div class="<%= row_style(symbol) %>" phx-click="put_symbol" phx-value-index="<%= index %>">
+            <button class="<%= row_style(symbol) %>" phx-click="put_symbol" phx-value-index="<%= index %>">
               <span class="mb-5"><%= symbol %></span>
-            </div>
+            </button>
           <% else %>
-            <div class="<%= row_style(symbol) %>">
+            <button class="<%= row_style(symbol) %>">
               <span class="mb-5"><%= symbol %></span>
-            </div>
+            </button>
           <% end %>
         <% end %>
       <% end %>
@@ -54,7 +54,8 @@ defmodule TictactoeWeb.BoardComponent do
   defp player_turn?(%{next: next}, %{symbol: symbol}), do: next == symbol
 
   defp row_style(symbol) do
-    default = "hover:bg-gray-300 h-24 rounded-md flex items-center justify-center text-white text-7xl"
+    default =
+      "hover:bg-gray-300 h-24 rounded-md flex items-center justify-center text-white text-7xl"
 
     additional =
       case symbol do

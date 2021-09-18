@@ -1,5 +1,5 @@
 defmodule Tictactoe.Application do
-  alias Tictactoe.Engine.{GameSupervisor}
+  alias Tictactoe.Engine.GameSupervisor
 
   use Application
 
@@ -14,6 +14,8 @@ defmodule Tictactoe.Application do
       TictactoeWeb.Endpoint,
       GameSupervisor
     ]
+
+    TictactoeWeb.PlayerETS.new()
 
     opts = [strategy: :one_for_one, name: Tictactoe.Supervisor]
     Supervisor.start_link(children, opts)

@@ -37,6 +37,8 @@ defmodule Tictactoe.MixProject do
       {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.14.7"},
+      {:ecto, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:ex_zample, github: "ulissesalmeida/ex_zample"},
