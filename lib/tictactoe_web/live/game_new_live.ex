@@ -5,18 +5,20 @@ defmodule TictactoeWeb.GameNewLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
+    ~H"""
     <div>
       <div class="md:w-3/6 mx-auto mt-40 p-5">
-        <%= f = form_for @changeset, "#", as: :game, class: "grid grid-cols-12", phx_submit: "create_game" %>
+        <.form let={f} for={@changeset} as="game" class="grid grid-cols-12" phx_submit="create_game" %>
           <div class="col-span-9">
-            <%= text_input f, :name, placeholder: "Create a new game...", autofocus: true, class: "w-full border-b border-gray-300" %>
+            <.input f={f} name={:name} placeholder="Create a new game..." />
           </div>
 
           <div class="col-span-3">
-            <%= submit "Start", class: "w-full border border-blue-500 px-4 py-2 bg-blue-500 text-blue-100" %>
+            <.button type="submit" class="w-full">
+              Start
+            </.button>
           </div>
-        </form>
+        </.form>
 
         <div class="mt-5">
           <div>

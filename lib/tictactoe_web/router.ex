@@ -19,7 +19,7 @@ defmodule TictactoeWeb.Router do
 
     live("/", PlayerNewLive)
     live("/games/new", GameNewLive)
-    live("games/:id/show", GameShowLive)
+    live("/games/:id/show", GameShowLive)
 
     delete("/logout", LogoutController, :delete)
   end

@@ -32,13 +32,13 @@ defmodule Tictactoe.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5"},
+      {:phoenix, "~> 1.6"},
       {:phoenix_pubsub, "~> 2.0"},
-      {:phoenix_html, "~> 2.14"},
+      {:phoenix_html, "~> 3.0.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.14.7"},
-      {:ecto, "~> 3.0"},
-      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_live_view, "~> 0.16.4"},
+      {:ecto, "~> 3.7"},
+      {:phoenix_ecto, "~> 4.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:ex_zample, github: "ulissesalmeida/ex_zample"},

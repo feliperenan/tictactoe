@@ -91,6 +91,8 @@ defmodule TictactoeWeb do
 
       import TictactoeWeb.ErrorHelpers
       import TictactoeWeb.Gettext
+      import TictactoeWeb.Components.Base
+
       alias TictactoeWeb.Router.Helpers, as: Routes
     end
   end

@@ -6,7 +6,7 @@ defmodule TictactoeWeb.GameShowLive do
 
   @impl true
   def render(%{game: %{x: x, o: o}} = assigns) when is_nil(x) or is_nil(o) do
-    ~L"""
+    ~H"""
       <p class="text-gray-600">
         Waiting for a second player...
       </p>
@@ -15,7 +15,7 @@ defmodule TictactoeWeb.GameShowLive do
 
   @impl true
   def render(%{game: nil} = assigns) do
-    ~L"""
+    ~H"""
     <section class="game">
       <div class="msg">
         Connecting...
@@ -26,7 +26,7 @@ defmodule TictactoeWeb.GameShowLive do
 
   @impl true
   def render(%{game: _game, error: nil} = assigns) do
-    ~L"""
+    ~H"""
     <div>
       <div class="max-w-2xl mx-auto">
         <%= live_component @socket, TictactoeWeb.BoardComponent, id: :board, game: @game, player: @player %>
@@ -63,7 +63,7 @@ defmodule TictactoeWeb.GameShowLive do
 
   @impl true
   def render(%{error: _error} = assigns) do
-    ~L"""
+    ~H"""
     <section class="game">
       <div data-error class="alert alert-info">
         <%= @error %>
