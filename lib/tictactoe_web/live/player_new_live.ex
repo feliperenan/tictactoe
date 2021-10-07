@@ -5,24 +5,22 @@ defmodule TictactoeWeb.PlayerNewLive do
   alias TictactoeWeb.Player
 
   def render(assigns) do
-    ~L"""
+    ~H"""
     <div class="md:w-3/6 mx-auto mt-40 p-5">
       <p class="mb-5 text-xl text-gray-600">
         Let's play Tic-Tac-Toe?
       </p>
-      <%= f = form_for @changeset, "#", as: :player, class: "grid grid-cols-12", phx_submit: "save"  %>
+      <.form let={f} for={@changeset} as="player" class="grid grid-cols-12" phx_submit="save">
         <div class="col-span-9">
-          <%= text_input f,
-                :name,
-                placeholder: "First, enter your name here...",
-                autofocus: true,
-                class: "w-full border-b border-gray-300" %>
+          <.input f={f} name={:name} placeholder="First, enter your name here..." />
         </div>
 
         <div class="col-span-3">
-          <%= submit "Submit", class: "w-full border border-blue-500 px-4 py-2 bg-blue-700 text-blue-100" %>
+          <.button type="submit" class="w-full">
+            Submit
+          </.button>
         </div>
-      </form>
+      </.form>
     </div>
     """
   end

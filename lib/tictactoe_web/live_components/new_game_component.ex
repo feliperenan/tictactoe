@@ -2,7 +2,7 @@ defmodule TictactoeWeb.NewGameComponent do
   use TictactoeWeb, :live_component
 
   def render(assigns) do
-    ~L"""
+    ~H"""
     <div
       class="
         min-w-screen
@@ -33,24 +33,9 @@ defmodule TictactoeWeb.NewGameComponent do
           <% end %>
           </div>
           <div class="p-3  mt-2 text-center space-x-4 d:block">
-          <button
-            phx-click="new_round"
-            class="
-              mb-2
-              md:mb-0
-              bg-white
-              px-5 py-2
-              text-sm
-              shadow-sm
-              font-medium
-              tracking-wider
-              border
-              text-gray-600
-              rounded-full
-              hover:shadow-lg
-              hover:bg-gray-100">
-                New Game
-          </button>
+          <.button click="new_round">
+            New Game
+          </.button>
         </div>
       </div>
     </div>
