@@ -1,11 +1,18 @@
 module.exports = {
-  purge: [
-    '../lib/**/*.ex',
-    '../lib/**/*.leex',
-    '../lib/**/*.heex',
-    '../lib/**/*.eex',
-    './js/**/*.js'
-  ],
+  purge: {
+    layers: ['components', 'utilities'],
+    enabled: process.env.NODE_ENV === "production",
+    content: [
+      "../lib/**/*.ex",
+      "../lib/**/*.eex",
+      "../lib/**/*.leex",
+      "../lib/**/*.heex",
+      "../lib/**/*_view.ex"
+    ],
+    options: {
+      whitelist: [/phx/, /nprogress/]
+    }
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
