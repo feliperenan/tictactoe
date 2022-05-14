@@ -34,9 +34,9 @@ defmodule Tictactoe.MixProject do
     [
       {:phoenix, "~> 1.6"},
       {:phoenix_pubsub, "~> 2.0"},
-      {:phoenix_html, "~> 3.0.0"},
+      {:phoenix_html, "~> 3.1.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.16.4"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:ecto, "~> 3.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:gettext, "~> 0.11"},
