@@ -7,18 +7,14 @@ defmodule TictactoeWeb.PlayerNewLive do
   def render(assigns) do
     ~H"""
     <div class="md:w-3/6 mx-auto mt-40 p-5">
-      <p class="mb-5 text-xl text-gray-600">
-        Let's play Tic-Tac-Toe?
-      </p>
+      <p class="mb-5 text-xl text-gray-600">Let's play Tic-Tac-Toe?</p>
       <.form :let={f} for={@changeset} as="player" class="grid grid-cols-12" phx_submit="save">
         <div class="col-span-9">
           <.input f={f} name={:name} placeholder="First, enter your name here..." />
         </div>
 
         <div class="col-span-3">
-          <.button type="submit" class="w-full">
-            Submit
-          </.button>
+          <.button type="submit" class="w-full">Submit</.button>
         </div>
       </.form>
     </div>

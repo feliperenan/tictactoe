@@ -14,28 +14,22 @@ defmodule TictactoeWeb.GameNewLive do
           </div>
 
           <div class="col-span-3">
-            <.button type="submit" class="w-full">
-              Start
-            </.button>
+            <.button type="submit" class="w-full">Start</.button>
           </div>
         </.form>
 
         <div class="mt-5">
-          <div>
-            <%= if length(@games) > 0 do %>
-              <p class="text-xl text-gray-500">
-                Or join one of the games below:
-              </p>
+          <%= if length(@games) > 0 do %>
+            <p class="text-xl text-gray-500">Or join one of the games below:</p>
+          <% end %>
+          <ul class="ml-5 mt-2 text-gray-500">
+            <%= for game <- @games do %>
+              <li class="list-disc">
+                <%= live_redirect game,
+                  to: Routes.live_path(@socket, TictactoeWeb.GameShowLive, game) %>
+              </li>
             <% end %>
-            <ul class="ml-5 mt-2 text-gray-500">
-              <%= for game <- @games do %>
-                <li class="list-disc">
-                  <%= live_redirect game,
-                    to: Routes.live_path(@socket, TictactoeWeb.GameShowLive, game) %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
     </div>
