@@ -2,16 +2,16 @@ defmodule TictactoeWeb.BoardComponent do
   use TictactoeWeb, :live_component
 
   def render(assigns) do
-    ~L"""
-    <div class="grid grid-cols-3 gap-2 p-5">
+    ~H"""
+    <div id="board-component" class="grid grid-cols-3 gap-2 p-5">
       <%= for positions <- split_in_rows_with_index(@game, 3) do %>
         <%= for {symbol, index} <- positions do %>
           <%= if player_turn?(@game, @player) do %>
-            <button class="<%= row_style(symbol) %>" phx-click="put_symbol" phx-value-index="<%= index %>">
+            <button class={row_style(symbol)} phx-click="put_symbol" phx-value-index={index}>
               <span class="mb-5"><%= symbol %></span>
             </button>
           <% else %>
-            <button class="<%= row_style(symbol) %>">
+            <button class={row_style(symbol)}>
               <span class="mb-5"><%= symbol %></span>
             </button>
           <% end %>
