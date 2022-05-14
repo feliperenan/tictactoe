@@ -10,7 +10,7 @@ defmodule TictactoeWeb.PlayerNewLive do
       <p class="mb-5 text-xl text-gray-600">
         Let's play Tic-Tac-Toe?
       </p>
-      <.form let={f} for={@changeset} as="player" class="grid grid-cols-12" phx_submit="save">
+      <.form :let={f} for={@changeset} as="player" class="grid grid-cols-12" phx_submit="save">
         <div class="col-span-9">
           <.input f={f} name={:name} placeholder="First, enter your name here..." />
         </div>

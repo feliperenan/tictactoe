@@ -7,9 +7,9 @@ defmodule TictactoeWeb.GameShowLive do
   @impl true
   def render(%{game: %{x: x, o: o}} = assigns) when is_nil(x) or is_nil(o) do
     ~H"""
-      <p class="text-gray-600">
-        Waiting for a second player...
-      </p>
+    <p class="text-gray-600">
+      Waiting for a second player...
+    </p>
     """
   end
 
@@ -29,7 +29,12 @@ defmodule TictactoeWeb.GameShowLive do
     ~H"""
     <div>
       <div class="max-w-2xl mx-auto">
-        <.live_component module={TictactoeWeb.BoardComponent} id="board" game={@game} player={@player} />
+        <.live_component
+          module={TictactoeWeb.BoardComponent}
+          id="board"
+          game={@game}
+          player={@player}
+        />
       </div>
 
       <section class="players text-gray-600">
