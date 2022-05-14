@@ -29,7 +29,7 @@ defmodule TictactoeWeb.GameShowLive do
     ~H"""
     <div>
       <div class="max-w-2xl mx-auto">
-        <%= live_component @socket, TictactoeWeb.BoardComponent, id: :board, game: @game, player: @player %>
+        <.live_component module={TictactoeWeb.BoardComponent} id="board" game={@game} player={@player} />
       </div>
 
       <section class="players text-gray-600">
@@ -55,7 +55,7 @@ defmodule TictactoeWeb.GameShowLive do
       </section>
 
       <%= if @game.finished do %>
-        <%= live_component @socket, TictactoeWeb.NewGameComponent, id: :new_game, game: @game %>
+        <.live_component module={TictactoeWeb.NewGameComponent} id="new_game" game={@game} />
       <% end %>
     </div>
     """
