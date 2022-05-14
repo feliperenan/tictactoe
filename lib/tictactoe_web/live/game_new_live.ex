@@ -8,7 +8,7 @@ defmodule TictactoeWeb.GameNewLive do
     ~H"""
     <div>
       <div class="md:w-3/6 mx-auto mt-40 p-5">
-        <.form let={f} for={@changeset} as="game" class="grid grid-cols-12" phx_submit="create_game" %>
+        <.form :let={f} for={@changeset} as="game" class="grid grid-cols-12" phx_submit="create_game">
           <div class="col-span-9">
             <.input f={f} name={:name} placeholder="Create a new game..." />
           </div>
@@ -30,7 +30,8 @@ defmodule TictactoeWeb.GameNewLive do
             <ul class="ml-5 mt-2 text-gray-500">
               <%= for game <- @games do %>
                 <li class="list-disc">
-                  <%= live_redirect game, to: Routes.live_path(@socket, TictactoeWeb.GameShowLive, game) %>
+                  <%= live_redirect game,
+                    to: Routes.live_path(@socket, TictactoeWeb.GameShowLive, game) %>
                 </li>
               <% end %>
             </ul>
