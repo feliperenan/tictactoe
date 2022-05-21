@@ -8,13 +8,23 @@ defmodule TictactoeWeb.PlayerNewLive do
     ~H"""
     <div class="md:w-3/6 mx-auto mt-40 p-5">
       <p class="mb-5 text-xl text-gray-600">Let's play Tic-Tac-Toe?</p>
-      <.form :let={f} for={@changeset} as="player" class="grid grid-cols-12" phx_submit="save">
+
+      <.form :let={f} for={@changeset} as={:player} class="grid grid-cols-12" phx-submit="save">
         <div class="col-span-9">
-          <.input f={f} name={:name} placeholder="First, enter your name here..." />
+          <%= text_input f,
+                         :name,
+                         placeholder: "First, enter your name here",
+                         autofocus: true,
+                         class: "w-full border-b border-gray-300" %>
         </div>
 
         <div class="col-span-3">
-          <.button type="submit" class="w-full">Submit</.button>
+          <button
+            type="submit"
+            class="border px-4 py-2 border-blue-500 bg-blue-700 text-blue-100 w-full"
+          >
+            Submit
+          </button>
         </div>
       </.form>
     </div>

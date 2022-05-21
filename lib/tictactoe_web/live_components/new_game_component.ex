@@ -26,15 +26,18 @@ defmodule TictactoeWeb.NewGameComponent do
       <div class="w-full max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
         <div class="text-center p-5 flex-auto justify-center">
           <%= if @game.winner == :draw do %>
-            <h2 class="text-xl font-bold py-4 ">DRAW Game</h2>
+            <h2 class="text-xl font-bold py-4">DRAW Game</h2>
           <% else %>
             <h2><%= Map.get(@game, @game.winner) <> " WON this Game" %></h2>
           <% end %>
         </div>
         <div class="p-3  mt-2 text-center space-x-4 d:block">
-          <.button click="new_round">
+          <button
+            class="border px-4 py-2 border-blue-500 bg-blue-700 text-blue-100"
+            phx-click="new_round"
+          >
             New Game
-          </.button>
+          </button>
         </div>
       </div>
     </div>
